@@ -13,13 +13,14 @@ cd dist
 # echo 'www.example.com' > CNAME
 
 git init
-git add .
-git commit -m 'deploy修改'
+git checkout -b main
+git add -A
+git commit -m '部署根文件目录修改'
 
 # 部署到 https://<USERNAME>.github.io
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
 
 # 部署到 https://<USERNAME>.github.io/<REPO>
- git push -f git@github.com:gaofeng222/adminvue2.git main:gh-pages
+git push -f git@github.com:gaofeng222/adminvue2.git main:gh-pages
 
 cd -
