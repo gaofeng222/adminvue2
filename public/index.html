@@ -3,9 +3,46 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0" /> -->
+    <!-- <%= htmlWebpackPlugin.options.viewport %> -->
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <!-- <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.1/vue.min.js"
+      integrity="sha512-IlIQ4xmw/lhSI27X3oMYzqKX+35vYBxzd9077OVAyuLmzMvPDnMovSAYY134zGclfHaV/mVKX6T19kwurr01SA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.0/vue-router.min.js"
+      integrity="sha512-7TKb9rZ0u1CXG1jjyed7Qmk73lO6pPxjjru9VYgXpXShVj3Up1+khbf1ytL/X4ZmY34ezCLZ42ppEJ/lUGqCJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.13/index.min.js"
+      integrity="sha512-Bq6xFt7DksWkzWyUkKpvheWXDcg5NFYatE9pSAWEvXdKWtysVLW9kHCLtXawCHbHD1nzOrw7GCSwyXnB4/KF/A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.13/theme-chalk/index.min.css"
+      integrity="sha512-R2MmHEhFdVpFIKnq3M5OwNWkrYGhQQ/kgcBoCxULcC0HW/kp3moce2UsmtBbFck2aDdrXJt1Hc+J/netYBqX7A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    /> -->
+    <!-- 使用CDN的CSS文件 -->
+
+    <% for (var i in htmlWebpackPlugin.options.cdn &&
+    htmlWebpackPlugin.options.cdn.css) { %>
+    <link
+      href="<%= htmlWebpackPlugin.options.cdn.css[i] %>"
+      rel="preload"
+      as="style"
+    />
+    <link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="stylesheet" />
+    <% } %>
   </head>
   <body>
     <noscript>
@@ -17,5 +54,9 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <% for (var i in htmlWebpackPlugin.options.cdn &&
+    htmlWebpackPlugin.options.cdn.js) { %>
+    <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
+    <% } %>
   </body>
 </html>
