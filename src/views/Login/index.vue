@@ -32,12 +32,15 @@
           >
         </el-form-item>
       </el-form>
+      <div class="login-tips">
+        <span>测试账号:admin</span><span>测试密码:123456</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import _ from 'lodash'
+import { getUserLists, loginIn } from '@/api/users'
 export default {
   name: 'Adminvue2Index',
 
@@ -56,24 +59,48 @@ export default {
           { required: true, message: '请输入密码', trigger: 'blur' },
           { min: 6, max: 8, message: '长度在 6 到 8 个字符', trigger: 'blur' }
         ]
-      }
+      },
+      userList: []
     }
   },
 
   mounted() {
-    console.log(_, 'lodash')
+    getUserLists().then((res) => {
+      console.log(res)
+      this.userList = res.data.data.rows
+    })
+    this.$notify({
+      title: '提示',
+      message: '欢迎试用安德玛管理系统!!!有问题请联系管理员QQ:596642721',
+      position: 'bottom-right',
+      type: 'success',
+      duration: 0
+    })
   },
 
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!')
+          loginIn(this.ruleForm).then((res) => {
+            console.log(res, 'login')
+            if (res.code == 200) {
+              this.$message({
+                message: '恭喜你，登录成功!',
+                type: 'success'
+              })
+            } else {
+              this.resetForm(formName)
+            }
+          })
         } else {
           console.log('error submit!!')
           return false
         }
       })
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields()
     }
   }
 }
@@ -107,6 +134,13 @@ export default {
       text-align: center;
       color: #333;
       margin-bottom: 20px;
+    }
+  }
+  .login-tips {
+    font-size: 12px;
+    color: #999;
+    span:first-child {
+      margin-right: 10px;
     }
   }
 }
