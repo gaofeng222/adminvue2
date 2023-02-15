@@ -7,18 +7,18 @@
 </template>
 
 <script>
-import Heador from '@layout/MainContent/Header'
+import Heador from "@layout/MainContent/Header";
 export default {
-  name: 'MainContent',
+  name: "MainContent",
   components: { Heador },
   data() {
-    return {}
+    return {};
   },
 
   mounted() {},
 
-  methods: {}
-}
+  methods: {},
+};
 </script>
 
 <style scoped></style>

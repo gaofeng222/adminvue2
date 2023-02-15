@@ -1,15 +1,15 @@
-import router from './router'
+import router from "./router";
 
-let token = ''
+let token = "";
 router.beforeEach((to, from, next) => {
   if (token) {
-    return next()
+    return next();
   } else {
-    console.log(to, 'to')
-    if (to.path != '/login') {
-      next('/login')
+    console.log(to, "to");
+    if (to.path != "/login") {
+      next("/login");
     } else {
-      next()
+      next();
     }
   }
-})
+});

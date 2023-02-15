@@ -4,16 +4,16 @@
 
 <script>
 export default {
-  name: 'Home',
+  name: "Home",
 
   data() {
-    return {}
+    return {};
   },
 
   mounted() {},
 
-  methods: {}
-}
+  methods: {},
+};
 </script>
 
 <style lang="less" scoped></style>

@@ -11,6 +11,7 @@ const cdn = {
     'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.1/vue.min.js',
     'https://cdn.bootcdn.net/ajax/libs/vue-router/3.0.2/vue-router.min.js',
     'https://unpkg.com/element-ui@2.13.2/lib/index.js'
+    // "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js",
   ]
 }
 const cdn2 = {
@@ -22,6 +23,11 @@ const externals = {
   vue: 'Vue',
   'vue-router': 'VueRouter',
   'element-ui': 'ELEMENT'
+  // lodash: {
+  //   commonjs: 'lodash',
+  //   amd: 'lodash',
+  //   root: '_' // indicates global variable
+  // }
 }
 module.exports = {
   //生产环境关闭source-map调试
@@ -67,14 +73,14 @@ module.exports = {
           args[0].cdn = cdn
           return args
         })
-        config.plugin('compressionPlugin').use(
-          new CompressionPlugin({
-            test: /\.(js)$/, // 匹配文件名
-            threshold: 10240, // 对超过10k的数据压缩
-            minRatio: 0.8,
-            deleteOriginalAssets: true // 删除源文件
-          })
-        )
+        // config.plugin('compressionPlugin').use(
+        //   new CompressionPlugin({
+        //     test: /\.(js)$/, // 匹配文件名
+        //     threshold: 10240, // 对超过10k的数据压缩
+        //     minRatio: 0.8,
+        //     deleteOriginalAssets: true // 删除源文件
+        //   })
+        // )
         return config
       },
       (config) => {
@@ -126,13 +132,13 @@ module.exports = {
           test: /[\\/]element-ui[\\/]/,
           chunks: 'all',
           priority: 0
-        },
-        lodash: {
-          name: 'lodash',
-          test: /[\\/]lodash[\\/]/,
-          chunks: 'all',
-          priority: 0
         }
+        // lodash: {
+        //   name: 'lodash',
+        //   test: /[\\/]lodash[\\/]/,
+        //   chunks: 'all',
+        //   priority: 0
+        // }
       }
     })
     config.devServer.port(5677).open(true)

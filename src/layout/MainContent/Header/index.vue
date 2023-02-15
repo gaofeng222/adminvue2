@@ -4,16 +4,16 @@
 
 <script>
 export default {
-  name: 'Header',
+  name: "Header",
 
   data() {
-    return {}
+    return {};
   },
 
   mounted() {},
 
-  methods: {}
-}
+  methods: {},
+};
 </script>
 
 <style lang="less" scoped>
