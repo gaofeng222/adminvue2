@@ -1,4 +1,6 @@
 const path = require('path')
+//打包压缩静态文件插件
+const CompressionPlugin = require('compression-webpack-plugin')
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
@@ -22,6 +24,8 @@ const externals = {
   'element-ui': 'ELEMENT'
 }
 module.exports = {
+  //生产环境关闭source-map调试
+  productionSourceMap: !IS_PRODUCTION,
   publicPath: IS_PRODUCTION ? '/adminvue2/' : '/',
   configureWebpack(config) {
     console.log('configureWebpack')
@@ -57,16 +61,25 @@ module.exports = {
     // }
     config.when(
       IS_PRODUCTION,
+      //前面的条件为true时执行第一个方法，否则执行第二个方法
       (config) => {
         config.plugin('html').tap((args) => {
           args[0].cdn = cdn
           return args
         })
+        config.plugin('compressionPlugin').use(
+          new CompressionPlugin({
+            test: /\.(js)$/, // 匹配文件名
+            threshold: 10240, // 对超过10k的数据压缩
+            minRatio: 0.8,
+            deleteOriginalAssets: true // 删除源文件
+          })
+        )
         return config
       },
       (config) => {
         config.plugin('html').tap((args) => {
-          //     // console.log(args, 'args22')
+          console.log(args, 'args22')
           args[0].cdn = cdn2
           return args
         })
@@ -76,7 +89,7 @@ module.exports = {
     config.plugin('html').tap((args) => {
       // 所有环境配置统一的title
 
-      args[0].title = '我的管理系统333'
+      args[0].title = '安德玛后台管理系统'
       // args[0].minify = true
       // args[0].inject = 'head'
       // console.log(args, 'args')
@@ -111,6 +124,12 @@ module.exports = {
         'element-ui': {
           name: 'element-ui',
           test: /[\\/]element-ui[\\/]/,
+          chunks: 'all',
+          priority: 0
+        },
+        lodash: {
+          name: 'lodash',
+          test: /[\\/]lodash[\\/]/,
           chunks: 'all',
           priority: 0
         }

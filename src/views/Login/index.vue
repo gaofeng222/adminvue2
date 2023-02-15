@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 export default {
   name: 'Adminvue2Index',
 
@@ -59,7 +60,9 @@ export default {
     }
   },
 
-  mounted() {},
+  mounted() {
+    console.log(_, 'lodash')
+  },
 
   methods: {
     submitForm(formName) {
@@ -95,6 +98,9 @@ export default {
     border-radius: 10px;
     box-shadow: 2px 2px 10px 4px #5377db;
     padding: 30px 60px;
+    // user-select: all;
+    // transform: rotate(-3deg);
+    // appearance: none;
     h2 {
       font-size: 24px;
       font-weight: bold;
