@@ -1,19 +1,23 @@
 <template>
-  <div>
+  <div class="main-container">
     <Heador />
-    <transition name="fade-transform" mode="out-in">
-      <keep-alive :include="cachedViews">
-        <router-view></router-view>
-      </keep-alive>
-    </transition>
+    <TagsViews />
+    <div class="main-c">
+      <transition name="fade-transform" mode="out-in">
+        <keep-alive :include="cachedViews">
+          <router-view></router-view>
+        </keep-alive>
+      </transition>
+    </div>
   </div>
 </template>
 
 <script>
 import Heador from '@layout/MainContent/Header'
+import TagsViews from './TagViews'
 export default {
   name: 'MainContent',
-  components: { Heador },
+  components: { Heador, TagsViews },
   data() {
     return {}
   },
@@ -32,4 +36,11 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style lang="less" scoped>
+.main-container {
+  .main-c {
+    padding: 10px;
+    box-sizing: border-box;
+  }
+}
+</style>

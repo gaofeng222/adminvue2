@@ -118,8 +118,9 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
-  background: @bgColor url('https://s1.ax1x.com/2023/02/16/pSblvX4.jpg')
+  background: @bgColor url('https://s1.ax1x.com/2023/02/17/pSbqGkT.jpg')
     no-repeat center;
+  background-size: cover;
   display: flex;
   place-items: center;
   justify-content: center;

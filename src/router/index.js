@@ -41,6 +41,7 @@ export const routes = [
         path: '/home',
         component: Home,
         icon: 'el-icon-s-home',
+        name: 'analysis',
         meta: {
           title: '分析统计'
         }
@@ -68,6 +69,7 @@ export const routes = [
       {
         path: '/products/lists',
         icon: 'el-icon-s-home',
+        name: 'catafory-lists',
         component: () =>
           import(/* webpackChunkName: "ProductLists" */ '@views/ProductLists'),
         meta: {
@@ -80,6 +82,7 @@ export const routes = [
         meta: {
           title: '产品分类'
         },
+        name: 'catafory-product',
         component: () =>
           import(
             /* webpackChunkName: "ProductCatagory" */ '@views/ProductCatagory'
@@ -101,6 +104,7 @@ export const routes = [
         component: () =>
           import(/* webpackChunkName: "ProductLists" */ '@views/ProductLists'),
         icon: 'el-icon-menu',
+        name: 'order-list',
         meta: {
           title: '订单列表'
         }
@@ -110,6 +114,7 @@ export const routes = [
         meta: {
           title: '汇总订单'
         },
+        name: 'total-order',
         icon: 'el-icon-s-data',
         component: () =>
           import(
@@ -128,6 +133,7 @@ export const routes = [
       {
         path: '/ad/list',
         icon: 'el-icon-tickets',
+        name: 'advertisement',
         meta: {
           title: '广告列表'
         },
@@ -146,6 +152,7 @@ export const routes = [
       {
         path: '/contact/list',
         icon: 'el-icon-present',
+        name: 'contact',
         meta: {
           title: '联系我们'
         },
