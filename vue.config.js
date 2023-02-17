@@ -53,6 +53,7 @@ module.exports = {
       .set('@views', resolve('src/views'))
       .set('@layout', resolve('src/layout'))
       .set('@utils', resolve('src/utils'))
+      .set('@style', resolve('src/style'))
     // if (IS_PRODUCTION) {
     //   config.plugin('html').tap((args) => {
     //     args[0].cdn = cdn

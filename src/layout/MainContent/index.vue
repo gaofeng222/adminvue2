@@ -1,24 +1,35 @@
 <template>
   <div>
     <Heador />
-    <!-- <Content /> -->
-    <router-view></router-view>
+    <transition name="fade-transform" mode="out-in">
+      <keep-alive :include="cachedViews">
+        <router-view></router-view>
+      </keep-alive>
+    </transition>
   </div>
 </template>
 
 <script>
-import Heador from "@layout/MainContent/Header";
+import Heador from '@layout/MainContent/Header'
 export default {
-  name: "MainContent",
+  name: 'MainContent',
   components: { Heador },
   data() {
-    return {};
+    return {}
   },
-
+  computed: {
+    cachedViews() {
+      // return this.$store.state.tagsView.cachedViews
+      return []
+    },
+    key() {
+      return this.$route.path
+    }
+  },
   mounted() {},
 
-  methods: {},
-};
+  methods: {}
+}
 </script>
 
 <style scoped></style>

@@ -6,8 +6,12 @@
         @toggleClick="toggleSideBar"
         :isActive="sidebar.opened"
       />
+      <Breadcrumb class="breadcrumb-container" />
     </div>
     <div class="right-info">
+      <div class="welcom-info">
+        <p>欢迎回来，{{ username }}</p>
+      </div>
       <el-dropdown
         class="avatar-container right-menu-item hover-effect"
         trigger="click"
@@ -37,15 +41,19 @@
 
 <script>
 import Hamburger from '@comp/Hamburger'
+import Breadcrumb from '@comp/Breadcrumb'
 import { logout } from '@/api/users'
 import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'Header',
 
   data() {
-    return {}
+    return {
+      username: 'admin'
+    }
   },
-  components: { Hamburger },
+  components: { Hamburger, Breadcrumb },
 
   mounted() {},
   computed: {
@@ -99,6 +107,11 @@ export default {
         background: rgba(0, 0, 0, 0.025);
       }
     }
+    .breadcrumb-container {
+      float: left;
+      line-height: 60px;
+      height: 100%;
+    }
   }
   .right-info {
     float: right;
@@ -107,8 +120,16 @@ export default {
     &:focus {
       outline: none;
     }
+    display: flex;
+    align-items: center;
+    .welcom-info {
+      font-size: 14px;
+      padding-top: 10px;
+      color: @subMenuBg;
+    }
     .avatar-container {
       margin-right: 30px;
+      margin-left: 10px;
       .avatar-wrapper {
         margin-top: 10px;
         position: relative;
