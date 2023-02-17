@@ -41,6 +41,7 @@ export default {
     top: 0;
     width: @sideBarWidth;
     background: @sidebarColor;
+    transition: width 0.28s;
     &.is-collapse {
       width: 70px !important;
     }
@@ -48,6 +49,7 @@ export default {
   .content {
     margin-left: @sideBarWidth;
     overflow: hidden;
+    background: #f0f2f5;
     &.is-collapse {
       margin-left: 70px !important;
     }
