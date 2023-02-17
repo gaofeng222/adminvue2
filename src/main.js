@@ -1,6 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
+import store from "./store";
 import "./permisson";
 import "@assets/reset.css";
 import ElementUI from "element-ui";
@@ -12,5 +13,6 @@ require("./mock/index"); //运行mock
 
 new Vue({
   router,
+  store,
   render: (h) => h(App),
 }).$mount("#app");

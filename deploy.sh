@@ -15,7 +15,7 @@ cd dist
 git init
 git checkout -b main
 git add -A
-git commit -m '线上部署环境的配置文件优化'
+git commit -m '静态单行菜单调试完成'
 
 # 部署到 https://<USERNAME>.github.io
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master

@@ -21,6 +21,7 @@
             show-password
             placeholder="请输入密码"
             v-model="ruleForm.password"
+            @keyup.enter.native="submitForm('ruleForm')"
           ></el-input>
         </el-form-item>
         <el-form-item>
@@ -41,6 +42,7 @@
 
 <script>
 import { getUserLists, loginIn } from '@/api/users'
+import storage from '@utils/storage'
 export default {
   name: 'Adminvue2Index',
 
@@ -89,6 +91,8 @@ export default {
                 message: '恭喜你，登录成功!',
                 type: 'success'
               })
+              storage.set('token', '123456')
+              this.$router.push('/home')
             } else {
               this.resetForm(formName)
             }
@@ -114,7 +118,8 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: @bgColor;
+  background: @bgColor url('https://s1.ax1x.com/2023/02/16/pSblvX4.jpg')
+    no-repeat center;
   display: flex;
   place-items: center;
   justify-content: center;
@@ -123,7 +128,7 @@ export default {
     width: 320px;
     height: 280px;
     border-radius: 10px;
-    box-shadow: 2px 2px 10px 4px #5377db;
+    box-shadow: 2px 2px 10px 4px lightblue;
     padding: 30px 60px;
     // user-select: all;
     // transform: rotate(-3deg);
@@ -134,6 +139,7 @@ export default {
       text-align: center;
       color: #333;
       margin-bottom: 20px;
+      color: @red;
     }
   }
   .login-tips {
