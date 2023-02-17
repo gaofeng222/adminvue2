@@ -32,6 +32,8 @@ export default {
 
 <style lang="less" scoped>
 .layout {
+  height: 100%;
+  overflow: hidden;
   .menu {
     position: absolute;
     left: 0;
@@ -45,6 +47,7 @@ export default {
   }
   .content {
     margin-left: @sideBarWidth;
+    overflow: hidden;
     &.is-collapse {
       margin-left: 70px !important;
     }

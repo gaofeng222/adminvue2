@@ -2,14 +2,14 @@
   <div class="header">
     <div class="left-menu">
       <Hamburger
-        class="hamburger-container"
+        class="hamburger-container hidden-xs-only"
         @toggleClick="toggleSideBar"
         :isActive="sidebar.opened"
       />
       <Breadcrumb class="breadcrumb-container" />
     </div>
     <div class="right-info">
-      <div class="welcom-info">
+      <div class="welcom-info hidden-xs-only">
         <p>欢迎回来，{{ username }}</p>
       </div>
       <el-dropdown
@@ -111,6 +111,7 @@ export default {
       float: left;
       line-height: 60px;
       height: 100%;
+      margin-left: 10px;
     }
   }
   .right-info {

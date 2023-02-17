@@ -43,7 +43,8 @@ export const routes = [
         icon: 'el-icon-s-home',
         name: 'analysis',
         meta: {
-          title: '分析统计'
+          title: '分析统计',
+          affix: true
         }
       },
       {
@@ -51,7 +52,8 @@ export const routes = [
         icon: 'el-icon-s-platform',
         name: 'Dashboard',
         meta: {
-          title: '仪表盘'
+          title: '仪表盘',
+          affix: true
         },
         component: Dashboard
       }

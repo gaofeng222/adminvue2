@@ -38,9 +38,13 @@ export default {
 
 <style lang="less" scoped>
 .main-container {
+  height: 100%;
+  overflow: hidden;
   .main-c {
     padding: 10px;
     box-sizing: border-box;
+    overflow: auto;
+    height: calc(100vh - 105px);
   }
 }
 </style>
