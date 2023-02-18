@@ -6,6 +6,7 @@ import './permisson'
 import '@style/index.less' // global css
 import 'element-ui/lib/theme-chalk/display.css'
 import ElementUI from 'element-ui'
+import '@comp/regsterGlobComps'
 // import 'element-ui/lib/theme-chalk/index.css'
 Vue.config.productionTip = false
 Vue.use(ElementUI)

@@ -140,7 +140,7 @@ export default {
       text-align: center;
       color: #333;
       margin-bottom: 20px;
-      color: @red;
+      // color: @red;
     }
   }
   .login-tips {

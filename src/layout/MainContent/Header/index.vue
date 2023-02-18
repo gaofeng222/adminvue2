@@ -9,6 +9,9 @@
       <Breadcrumb class="breadcrumb-container" />
     </div>
     <div class="right-info">
+      <div class="time-info">
+        <span>当前时间:{{ nowTime }}</span>
+      </div>
       <div class="welcom-info hidden-xs-only">
         <p>欢迎回来，{{ username }}</p>
       </div>
@@ -44,20 +47,30 @@ import Hamburger from '@comp/Hamburger'
 import Breadcrumb from '@comp/Breadcrumb'
 import { logout } from '@/api/users'
 import { mapActions, mapGetters } from 'vuex'
+import dayjs from 'dayjs'
 
 export default {
   name: 'Header',
 
   data() {
     return {
-      username: 'admin'
+      username: 'admin',
+      nowTime: '',
+      timeId: null
     }
   },
   components: { Hamburger, Breadcrumb },
-
-  mounted() {},
+  created() {
+    this.initTime()
+  },
+  mounted() {
+    // console.log(dayjs().format())
+  },
   computed: {
     ...mapGetters(['sidebar'])
+  },
+  beforeDestroy() {
+    clearTimeout(this.timeId)
   },
   methods: {
     ...mapActions('app', {
@@ -83,6 +96,15 @@ export default {
         // this.$router.push('/')
         location.reload()
       })
+    },
+    initTime() {
+      this.nowTime = dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss')
+      this.timeId = setInterval(() => {
+        this.gettime()
+      }, 1000)
+    },
+    gettime() {
+      this.nowTime = dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss')
     }
   }
 }
@@ -123,6 +145,10 @@ export default {
     }
     display: flex;
     align-items: center;
+    .time-info {
+      padding-top: 11px;
+      margin-right: 10px;
+    }
     .welcom-info {
       font-size: 14px;
       padding-top: 10px;

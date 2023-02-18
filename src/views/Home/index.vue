@@ -16,7 +16,9 @@
             <div class="text item">
               <p class="item-o">
                 <span> $2,000 </span>
-                <span></span>
+                <span
+                  ><svg-icon iconClass="channel" svgClass="channel"></svg-icon
+                ></span>
               </p>
               <p class="item-t">
                 <span> 总访问数 </span>
@@ -41,7 +43,9 @@
             <div class="text item">
               <p class="item-o">
                 <span> $20,000 </span>
-                <span></span>
+                <span
+                  ><svg-icon iconClass="fire" svgClass="fire"></svg-icon
+                ></span>
               </p>
               <p class="item-t">
                 <span> 总访问数 </span>
@@ -66,7 +70,9 @@
             <div class="text item">
               <p class="item-o">
                 <span> $8,000 </span>
-                <span></span>
+                <span
+                  ><svg-icon iconClass="order" svgClass="order"></svg-icon
+                ></span>
               </p>
               <p class="item-t">
                 <span> 总访问数 </span>
@@ -91,7 +97,7 @@
             <div class="text item">
               <p class="item-o">
                 <span> $5,000 </span>
-                <span></span>
+                <span><svg-icon iconClass="wx"></svg-icon></span>
               </p>
               <p class="item-t">
                 <span> 总访问数 </span>
