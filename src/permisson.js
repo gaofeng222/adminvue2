@@ -3,7 +3,7 @@ import storage from '@utils/storage'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist
-NProgress.configure({ showSpinner: true }) // NProgress Configuration
+NProgress.configure({ showSpinner: false }) // NProgress Configuration
 router.beforeEach((to, from, next) => {
   // console.log(to, 'to111')
   // console.log(from, 'from111')

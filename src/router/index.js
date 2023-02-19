@@ -104,7 +104,7 @@ export const routes = [
       {
         path: '/orders/lists',
         component: () =>
-          import(/* webpackChunkName: "ProductLists" */ '@views/ProductLists'),
+          import(/* webpackChunkName: "ProductLists" */ '@views/OrderLists'),
         icon: 'el-icon-menu',
         name: 'order-list',
         meta: {
@@ -120,7 +120,7 @@ export const routes = [
         icon: 'el-icon-s-data',
         component: () =>
           import(
-            /* webpackChunkName: "ProductCatagory" */ '@views/ProductCatagory'
+            /* webpackChunkName: "ProductCatagory" */ '@views/OrderCatagory'
           )
       }
     ]

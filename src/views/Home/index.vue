@@ -97,7 +97,7 @@
             <div class="text item">
               <p class="item-o">
                 <span> $5,000 </span>
-                <span><svg-icon iconClass="wx"></svg-icon></span>
+                <span><svg-icon iconClass="wx" svgClass="wx"></svg-icon></span>
               </p>
               <p class="item-t">
                 <span> 总访问数 </span>
@@ -159,7 +159,7 @@
 </template>
 
 <script>
-import MyEcharts from '@comp/Echarts'
+// import MyEcharts from '@comp/Echarts'
 export default {
   name: 'Home',
 
@@ -456,7 +456,7 @@ export default {
       }
     }
   },
-  components: { MyEcharts },
+  components: {},
   mounted() {},
 
   methods: { handleClick() {} }

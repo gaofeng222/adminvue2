@@ -13,6 +13,8 @@
             prefix-icon="el-icon-user"
             placeholder="请输入账户"
             v-model="ruleForm.username"
+            autofocus
+            v-focus
           ></el-input>
         </el-form-item>
         <el-form-item label="" prop="password">
@@ -21,6 +23,7 @@
             show-password
             placeholder="请输入密码"
             v-model="ruleForm.password"
+            v-focus
             @keyup.enter.native="submitForm('ruleForm')"
           ></el-input>
         </el-form-item>
@@ -42,6 +45,7 @@
 
 <script>
 import { getUserLists, loginIn } from '@/api/users'
+import { focus } from '@/directives'
 import storage from '@utils/storage'
 export default {
   name: 'Adminvue2Index',
@@ -65,7 +69,7 @@ export default {
       userList: []
     }
   },
-
+  directives: { focus },
   mounted() {
     getUserLists().then((res) => {
       console.log(res)
@@ -126,8 +130,8 @@ export default {
   justify-content: center;
   .form-content {
     background: #fff;
-    width: 320px;
-    height: 280px;
+    width: 440px;
+    height: 350px;
     border-radius: 10px;
     box-shadow: 2px 2px 10px 4px lightblue;
     padding: 30px 60px;

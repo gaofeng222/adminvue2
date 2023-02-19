@@ -10,7 +10,11 @@ const cdn = {
   js: [
     'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.1/vue.min.js',
     'https://cdn.bootcdn.net/ajax/libs/vue-router/3.0.2/vue-router.min.js',
-    'https://unpkg.com/element-ui@2.13.2/lib/index.js'
+    'https://unpkg.com/element-ui@2.13.2/lib/index.js',
+    'https://unpkg.com/dayjs@1.8.21/dayjs.min.js',
+    // 'https://cdnjs.cloudflare.com/ajax/libs/Mock.js/1.0.0/mock-min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/vuex/3.1.0/vuex.min.js'
+    // 'https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js'
     // "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js",
   ]
 }
@@ -22,7 +26,10 @@ const externals = {
   // 属性名称 vue, 表示遇到 import xxx from 'vue' 这类引入 'vue'的，不去 node_modules 中找，而是去找全局变量 Vue（其他的为VueRouter、Vuex、axios、ELEMENT、echarts，注意全局变量是一个确定的值，不能修改为其他值，修改为其他大小写或者其他值会报错，若有异议可留言）
   vue: 'Vue',
   'vue-router': 'VueRouter',
-  'element-ui': 'ELEMENT'
+  vuex: 'Vuex',
+  'element-ui': 'ELEMENT',
+  dayjs: 'dayjs'
+
   // lodash: {
   //   commonjs: 'lodash',
   //   amd: 'lodash',
@@ -160,15 +167,35 @@ module.exports = {
           test: /[\\/]element-ui[\\/]/,
           chunks: 'all',
           priority: 0
+        },
+        lodash: {
+          name: 'lodash',
+          test: /[\\/]lodash[\\/]/,
+          chunks: 'all',
+          priority: 0
+        },
+        nprogress: {
+          name: 'nprogress',
+          test: /[\\/]nprogress[\\/]/,
+          chunks: 'all',
+          priority: 2
+        },
+        mockjs: {
+          name: 'mockjs',
+          test: /[\\/]mockjs[\\/]/,
+          chunks: 'all',
+          priority: 0
         }
-        // lodash: {
-        //   name: 'lodash',
-        //   test: /[\\/]lodash[\\/]/,
-        //   chunks: 'all',
-        //   priority: 0
-        // }
       }
     })
     config.devServer.port(5677).open(true)
+  },
+  // 加入以下代码
+  css: {
+    loaderOptions: {
+      postcss: {
+        plugins: [require('tailwindcss'), require('autoprefixer')]
+      }
+    }
   }
 }
