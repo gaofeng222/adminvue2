@@ -20,7 +20,7 @@
             data-v-e0ef77de=""
           ></path>
         </svg>
-        <h3 v-if="!sidebar.opened">我的管理后台</h3>
+        <h3 v-if="!sidebar.opened">{{ systemName }}管理后台</h3>
       </router-link>
     </div>
   </transition>
@@ -38,7 +38,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['sidebar'])
+    ...mapGetters(['sidebar', 'systemName'])
   },
   mounted() {
     // console.log(this.siderbar, 'side')

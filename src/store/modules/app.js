@@ -8,7 +8,9 @@ const state = {
     withoutAnimation: false
   },
   device: 'desktop',
-  size: storage.get('size') || 'medium'
+  size: storage.get('size') || 'medium',
+  breadcrumeShow: true,
+  systemName: storage.get('systemName') || '我的'
 }
 
 const mutations = {
@@ -20,6 +22,13 @@ const mutations = {
     } else {
       storage.set('sidebarStatus', 0)
     }
+  },
+  TOGGLE_BREADCRUME(state) {
+    state.breadcrumeShow = !state.breadcrumeShow
+  },
+  CHANGE_SYSTEMNAME(state, value) {
+    storage.set('systemName', value)
+    state.systemName = value
   }
 }
 

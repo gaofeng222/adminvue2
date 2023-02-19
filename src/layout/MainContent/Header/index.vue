@@ -1,12 +1,15 @@
 <template>
   <div class="header">
-    <div class="left-menu">
+    <div class="left-menu w-1/3">
       <Hamburger
         class="hamburger-container hidden-xs-only"
         @toggleClick="toggleSideBar"
         :isActive="sidebar.opened"
       />
-      <Breadcrumb class="breadcrumb-container" />
+      <Breadcrumb v-if="breadcrumeShow" class="breadcrumb-container" />
+      <h3 v-else style="line-height: 60px" class="ml-10">
+        欢迎进入{{ systemName }}后台管理系统
+      </h3>
     </div>
     <div class="right-info">
       <div class="time-info">
@@ -38,13 +41,18 @@
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
+      <div>
+        <i class="el-icon-s-tools" @click="showDrawerHandle"></i>
+      </div>
     </div>
+    <Drawer :drawerShow="drawerShow" @closDrawerHandle="closDrawerHandle" />
   </div>
 </template>
 
 <script>
 import Hamburger from '@comp/Hamburger'
 import Breadcrumb from '@comp/Breadcrumb'
+import Drawer from '@comp/Drawer'
 import { logout } from '@/api/users'
 import { mapActions, mapGetters } from 'vuex'
 import dayjs from 'dayjs'
@@ -56,10 +64,11 @@ export default {
     return {
       username: 'admin',
       nowTime: '',
-      timeId: null
+      timeId: null,
+      drawerShow: false
     }
   },
-  components: { Hamburger, Breadcrumb },
+  components: { Hamburger, Breadcrumb, Drawer },
   created() {
     this.initTime()
   },
@@ -67,7 +76,7 @@ export default {
     // console.log(dayjs().format())
   },
   computed: {
-    ...mapGetters(['sidebar'])
+    ...mapGetters(['sidebar', 'breadcrumeShow', 'systemName'])
   },
   beforeDestroy() {
     clearTimeout(this.timeId)
@@ -105,6 +114,12 @@ export default {
     },
     gettime() {
       this.nowTime = dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss')
+    },
+    showDrawerHandle() {
+      this.drawerShow = !this.drawerShow
+    },
+    closDrawerHandle() {
+      this.drawerShow = false
     }
   }
 }
@@ -174,6 +189,11 @@ export default {
           font-size: 12px;
         }
       }
+    }
+    .el-icon-s-tools {
+      padding-top: 15px;
+      cursor: pointer;
+      padding-right: 10px;
     }
   }
 }

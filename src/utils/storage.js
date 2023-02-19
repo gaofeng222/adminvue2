@@ -1,13 +1,13 @@
 var storage = {
   set(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+    localStorage.setItem(key, value)
   },
   get(key) {
-    return JSON.parse(localStorage.getItem(key));
+    return localStorage.getItem(key)
   },
   remove(key) {
-    localStorage.removeItem(key);
-  },
-};
+    localStorage.removeItem(key)
+  }
+}
 
-export default storage;
+export default storage
