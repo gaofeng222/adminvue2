@@ -1,5 +1,5 @@
 <template>
-  <Pagerapper>
+  <PageWrapper>
     <!-- {{ tableCalHeight }} -->
     <el-table
       ref="tableComp"
@@ -32,7 +32,7 @@
       :total="400"
     >
     </el-pagination>
-  </Pagerapper>
+  </PageWrapper>
 </template>
 
 <script>

@@ -125,6 +125,25 @@ export const routes = [
       }
     ]
   },
+  // {
+  //   path: '/components',
+  //   component: Layout,
+  //   meta: {
+  //     title: '组件管理'
+  //   },
+  //   children: [
+  //     {
+  //       path: '/components/edite',
+  //       icon: 'el-icon-tickets',
+  //       name: 'editePage',
+  //       meta: {
+  //         title: '富文本'
+  //       },
+  //       component: () =>
+  //         import(/* webpackChunkName: "ProductCatagory" */ '@views/Edite')
+  //     }
+  //   ]
+  // },
   {
     path: '/ad',
     component: Layout,

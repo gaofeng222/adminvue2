@@ -1,5 +1,5 @@
 <template>
-  <Pagerapper>
+  <PageWrapper>
     <el-form
       :label-position="labelPosition"
       label-width="80px"
@@ -45,7 +45,7 @@
       :total="400"
     >
     </el-pagination>
-  </Pagerapper>
+  </PageWrapper>
 </template>
 
 <script>

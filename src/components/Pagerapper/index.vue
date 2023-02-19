@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'Pagerapper',
+  name: 'PageWrapper',
 
   data() {
     return {}
