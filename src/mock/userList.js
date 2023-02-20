@@ -18,12 +18,14 @@ const loginOk = {
   code: 200,
   message: '登录成功',
   data: {
-    result: true
+    result: true,
+    token:
+      'jiuiwqewqepkpqwepwpekpwqkepwqkepqkpekwpqekpqwkepqkwp132321312pkpkp12k3p1kpk12p3kp21k3p21k3p'
   }
 }
 const loginError = {
   code: 500,
-  message: '登录失败',
+  message: '账号或密码错误',
   data: {
     result: false
   }

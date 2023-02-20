@@ -2,12 +2,14 @@ import router from './router'
 import storage from '@utils/storage'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
+import getPageTitle from '@utils/getPageTitle'
 const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 router.beforeEach((to, from, next) => {
   // console.log(to, 'to111')
   // console.log(from, 'from111')
   NProgress.start()
+  document.title = getPageTitle(to.meta.title)
   let token = storage.get('token')
   if (token) {
     if (to.path === '/login') {

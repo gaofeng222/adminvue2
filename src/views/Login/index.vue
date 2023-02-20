@@ -30,6 +30,7 @@
         <el-form-item>
           <el-button
             style="width: 100%"
+            :loading="loading"
             type="primary"
             @click="submitForm('ruleForm')"
             >登 录</el-button
@@ -47,10 +48,26 @@
 import { getUserLists, loginIn } from '@/api/users'
 import { focus } from '@/directives'
 import storage from '@utils/storage'
+import { validUsername } from '@utils/validate'
+import { mapActions } from 'vuex'
 export default {
-  name: 'Adminvue2Index',
+  name: 'Login',
 
   data() {
+    const validateUsername = (rule, value, callback) => {
+      if (!validUsername(value)) {
+        callback(new Error('请输入正确的账户名'))
+      } else {
+        callback()
+      }
+    }
+    const validatePassword = (rule, value, callback) => {
+      if (value.length < 6) {
+        callback(new Error('密码长度不能少于6位'))
+      } else {
+        callback()
+      }
+    }
     return {
       ruleForm: {
         username: '',
@@ -58,18 +75,31 @@ export default {
       },
       rules: {
         username: [
-          { required: true, message: '请输入账号', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          { required: true, trigger: 'blur', validator: validateUsername }
         ],
         password: [
-          { required: true, message: '请输入密码', trigger: 'blur' },
-          { min: 6, max: 8, message: '长度在 6 到 8 个字符', trigger: 'blur' }
+          { required: true, trigger: 'blur', validator: validatePassword }
         ]
       },
-      userList: []
+      userList: [],
+      loading: false,
+      otherQuery: {},
+      redirect: ''
     }
   },
   directives: { focus },
+  watch: {
+    $route: {
+      handler: function (route) {
+        const query = route.query
+        if (query) {
+          this.redirect = query.redirect
+          this.otherQuery = this.getOtherQuery(query)
+        }
+      },
+      immediate: true
+    }
+  },
   mounted() {
     getUserLists().then((res) => {
       console.log(res)
@@ -85,27 +115,46 @@ export default {
   },
 
   methods: {
+    ...mapActions('user', {
+      getLogin: 'login'
+    }),
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          loginIn(this.ruleForm).then((res) => {
-            console.log(res, 'login')
-            if (res.code == 200) {
-              this.$message({
-                message: '恭喜你，登录成功!',
-                type: 'success'
-              })
-              storage.set('token', '123456')
-              this.$router.push('/home')
-            } else {
-              this.resetForm(formName)
-            }
-          })
+          this.loading = true
+          this.getLogin(this.ruleForm)
+            .then((res) => {
+              console.log(res, 'login')
+              if (res.code == 200) {
+                this.$message({
+                  message: '恭喜你，登录成功!',
+                  type: 'success'
+                })
+                this.$router.push({
+                  path: this.redirect || '/',
+                  query: this.otherQuery
+                })
+              } else {
+                this.loading = false
+                this.resetForm(formName)
+              }
+            })
+            .catch(() => {
+              this.loading = false
+            })
         } else {
           console.log('error submit!!')
           return false
         }
       })
+    },
+    getOtherQuery(query) {
+      return Object.keys(query).reduce((acc, cur) => {
+        if (cur !== 'redirect') {
+          acc[cur] = query[cur]
+        }
+        return acc
+      }, {})
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()

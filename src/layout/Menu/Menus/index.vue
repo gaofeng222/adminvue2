@@ -25,7 +25,7 @@
 
 <script>
 import MenuItem from './MenuItem'
-import { routes } from '@/router'
+import { constantRoutes } from '@/router'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Menus',
@@ -41,7 +41,7 @@ export default {
     RouterLists() {
       console.log('888')
       //对菜单进行处理,只有一个菜单就不显示父级
-      return routes.map((item) => {
+      return constantRoutes.map((item) => {
         if (item.children && item.children.length === 1) {
           item = item.children[0]
         }

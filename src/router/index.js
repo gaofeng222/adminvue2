@@ -25,8 +25,7 @@ Vue.use(VueRouter)
   }
  */
 
-console.log(Login, 'Login')
-export const routes = [
+export const constantRoutes = [
   { path: '/login', component: Login, hidden: true },
   {
     path: '/',
@@ -104,7 +103,7 @@ export const routes = [
       {
         path: '/orders/lists',
         component: () =>
-          import(/* webpackChunkName: "ProductLists" */ '@views/OrderLists'),
+          import(/* webpackChunkName: "OrderLists" */ '@views/OrderLists'),
         icon: 'el-icon-menu',
         name: 'order-list',
         meta: {
@@ -119,9 +118,7 @@ export const routes = [
         name: 'total-order',
         icon: 'el-icon-s-data',
         component: () =>
-          import(
-            /* webpackChunkName: "ProductCatagory" */ '@views/OrderCatagory'
-          )
+          import(/* webpackChunkName: "OrderCatagory" */ '@views/OrderCatagory')
       }
     ]
   },
@@ -164,11 +161,22 @@ export const routes = [
     ]
   },
   {
+    path: '/404',
+    component: () => import('@views/ErrorPage/404'),
+    hidden: true
+  },
+  {
+    path: '/401',
+    component: () => import('@views/ErrorPage/401'),
+    hidden: true
+  },
+  {
     path: '/contact',
     component: Layout,
     meta: {
       title: '反馈管理'
     },
+
     children: [
       {
         path: '/contact/list',
@@ -181,15 +189,25 @@ export const routes = [
           import(/* webpackChunkName: "ProductCatagory" */ '@views/Contact')
       }
     ]
-  }
+  },
+  // 404 page must be placed at the end !!!
+  { path: '*', redirect: '/404', hidden: true }
 ]
 
 // 3. 创建 router 实例，然后传 `routes` 配置
 // 你还可以传别的配置参数, 不过先这么简单着吧。
-const router = new VueRouter({
-  mode: 'hash',
-  base: process.env.BASE_URL,
-  routes // (缩写) 相当于 routes: routes
-})
+const createRouter = () =>
+  new VueRouter({
+    mode: 'hash',
+    base: process.env.BASE_URL,
+    routes: constantRoutes // (缩写) 相当于 routes: routes
+  })
+const router = createRouter()
+
+// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
+export function resetRouter() {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher // reset router
+}
 
 export default router

@@ -53,7 +53,6 @@
 import Hamburger from '@comp/Hamburger'
 import Breadcrumb from '@comp/Breadcrumb'
 import Drawer from '@comp/Drawer'
-import { logout } from '@/api/users'
 import { mapActions, mapGetters } from 'vuex'
 import dayjs from 'dayjs'
 
@@ -92,8 +91,7 @@ export default {
       this.toggleSideBarHandle()
     },
     logout() {
-      this.logoutHandle()
-      logout().then((res) => {
+      this.logoutHandle().then((res) => {
         if (res.code == 200) {
           this.$notify({
             title: '提示',
@@ -102,8 +100,8 @@ export default {
             duration: 1000
           })
         }
-        // this.$router.push('/')
-        location.reload()
+        this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+        // location.reload()
       })
     },
     initTime() {

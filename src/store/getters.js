@@ -5,7 +5,8 @@ const getters = {
   breadcrumeShow: (state) => state.app.breadcrumeShow,
   systemName: (state) => state.app.systemName,
   visitedViews: (state) => state.tagsViews.visitedViews,
-  cachedViews: (state) => state.tagsView.cachedViews
+  cachedViews: (state) => state.tagsView.cachedViews,
+  roles: (state) => state.user.roles
 }
 
 export default getters
