@@ -1,8 +1,13 @@
 <template>
   <div class="main-container">
     <Heador />
-    <TagsViews />
-    <div class="main-c">
+    <TagsViews v-if="showTagsView" />
+    <div
+      class="main-c"
+      :style="{
+        height: showTagsView ? 'calc(100vh - 105px)' : 'calc(100vh - 61px)'
+      }"
+    >
       <transition name="fade-transform" mode="out-in">
         <keep-alive :include="cachedViews">
           <router-view></router-view>
@@ -15,6 +20,7 @@
 <script>
 import Heador from '@layout/MainContent/Header'
 import TagsViews from './TagViews'
+import { mapGetters } from 'vuex'
 export default {
   name: 'MainContent',
   components: { Heador, TagsViews },
@@ -22,10 +28,7 @@ export default {
     return {}
   },
   computed: {
-    cachedViews() {
-      // return this.$store.state.tagsView.cachedViews
-      return []
-    },
+    ...mapGetters(['showTagsView', 'cachedViews']),
     key() {
       return this.$route.path
     }
@@ -44,7 +47,6 @@ export default {
     padding: 10px;
     box-sizing: border-box;
     overflow: auto;
-    height: calc(100vh - 105px);
   }
 }
 </style>

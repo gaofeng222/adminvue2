@@ -50,7 +50,7 @@ export default {
     margin-left: @sideBarWidth;
     overflow: hidden;
     background: #f0f2f5;
-
+    height: 100%;
     &.is-collapse {
       transition: width 0.28s;
       margin-left: 70px !important;

@@ -10,7 +10,8 @@ const state = {
   device: 'desktop',
   size: storage.get('size') || 'medium',
   breadcrumeShow: true,
-  systemName: storage.get('systemName') || '我的'
+  systemName: storage.get('systemName') || '我的',
+  showTagsView: true
 }
 
 const mutations = {
@@ -29,6 +30,9 @@ const mutations = {
   CHANGE_SYSTEMNAME(state, value) {
     storage.set('systemName', value)
     state.systemName = value
+  },
+  TOGGLE_TAGVIEWS(state) {
+    state.showTagsView = !state.showTagsView
   }
 }
 

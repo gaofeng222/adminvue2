@@ -22,5 +22,6 @@ export default {
 .pege-wrapper {
   background-color: #fff;
   padding: 10px;
+  height: 100%;
 }
 </style>

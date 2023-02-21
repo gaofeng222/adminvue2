@@ -13,7 +13,7 @@ Vue.use(VueRouter)
  *                                if not set alwaysShow, when item has more than one children route,
  *                                it will becomes nested mode, otherwise not show the root menu
  * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
- * name:'router-name'             the name is used by <keep-alive> (must set!!!)
+ * name:'router-name'             the name is used by <keep-alive> (must set!!!) 组件里面的name === route.js里面，保持一致
  * meta : {
     roles: ['admin','editor']    control the page roles (you can set multiple roles)
     title: 'title'               the name show in sidebar and breadcrumb (recommend set)
@@ -34,13 +34,14 @@ export const constantRoutes = [
     meta: {
       title: '首页'
     },
+    name: 'Index',
     icon: 'el-icon-s-home',
     children: [
       {
         path: '/home',
         component: Home,
         icon: 'el-icon-s-home',
-        name: 'analysis',
+        name: 'Analysis',
         meta: {
           title: '分析统计',
           affix: true
@@ -66,11 +67,12 @@ export const constantRoutes = [
     meta: {
       title: '产品管理'
     },
+    name: 'Product',
     children: [
       {
         path: '/products/lists',
         icon: 'el-icon-s-home',
-        name: 'catafory-lists',
+        name: 'Products-lists',
         component: () =>
           import(/* webpackChunkName: "ProductLists" */ '@views/ProductLists'),
         meta: {
@@ -83,7 +85,7 @@ export const constantRoutes = [
         meta: {
           title: '产品分类'
         },
-        name: 'catafory-product',
+        name: 'Products-catagory',
         component: () =>
           import(
             /* webpackChunkName: "ProductCatagory" */ '@views/ProductCatagory'
@@ -99,15 +101,17 @@ export const constantRoutes = [
     meta: {
       title: '订单管理'
     },
+    name: 'Orders',
     children: [
       {
         path: '/orders/lists',
         component: () =>
           import(/* webpackChunkName: "OrderLists" */ '@views/OrderLists'),
         icon: 'el-icon-menu',
-        name: 'order-list',
+        name: 'OrderLists',
         meta: {
-          title: '订单列表'
+          title: '订单列表',
+          noCache: true
         }
       },
       {
@@ -115,7 +119,7 @@ export const constantRoutes = [
         meta: {
           title: '汇总订单'
         },
-        name: 'total-order',
+        name: 'TotalOrder',
         icon: 'el-icon-s-data',
         component: () =>
           import(/* webpackChunkName: "OrderCatagory" */ '@views/OrderCatagory')
@@ -147,11 +151,12 @@ export const constantRoutes = [
     meta: {
       title: '广告管理'
     },
+    name: 'Ad',
     children: [
       {
         path: '/ad/list',
         icon: 'el-icon-tickets',
-        name: 'advertisement',
+        name: 'Advertisement',
         meta: {
           title: '广告列表'
         },
@@ -176,12 +181,12 @@ export const constantRoutes = [
     meta: {
       title: '反馈管理'
     },
-
+    name: 'FeedBack',
     children: [
       {
         path: '/contact/list',
         icon: 'el-icon-present',
-        name: 'contact',
+        name: 'Contact',
         meta: {
           title: '联系我们'
         },

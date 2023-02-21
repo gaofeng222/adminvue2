@@ -39,11 +39,11 @@ router.beforeEach(async (to, from, next) => {
           ]
           console.log(accessRoutes, 'accessRoutes')
           console.log(roles, 'roles333')
-          // router.addRoutes(accessRoutes)
-          for (const route of dRoutes) {
-            console.log(route, 'route')
-            router.addRoute(route)
-          }
+          router.addRoutes(dRoutes)
+          // for (const route of dRoutes) {
+          //   console.log(route, 'route')
+          //   router.addRoute(route)
+          // }
           next({ ...to, replace: true })
         } catch (error) {
           console.log(error)

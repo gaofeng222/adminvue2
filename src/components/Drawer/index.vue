@@ -18,6 +18,15 @@
           >
           </el-switch>
         </el-form-item>
+        <el-form-item label="标签页：">
+          <el-switch
+            v-model="form.tagValue"
+            active-color="#13ce66"
+            inactive-color="#ccc"
+            @change="changeTagViews"
+          >
+          </el-switch>
+        </el-form-item>
         <el-form-item label="系统名称：">
           <el-input v-model="form.sysName" class="w-4/5" />
         </el-form-item>
@@ -47,15 +56,18 @@ export default {
     return {
       form: {
         switchValue: true,
+        tagValue: true,
         sysName: ''
       }
     }
   },
   computed: {
-    ...mapGetters(['systemName'])
+    ...mapGetters(['systemName', 'showTagsView', 'breadcrumeShow'])
   },
   created() {
     console.log(this.systemName, 'this.systemName')
+    this.switchValue = this.breadcrumeShow
+    this.tagValue = this.showTagsView
     this.form.sysName = this.systemName
   },
   mounted() {},
@@ -63,13 +75,17 @@ export default {
   methods: {
     ...mapMutations('app', {
       changeBreadcrums: 'TOGGLE_BREADCRUME',
-      changeSystemName: 'CHANGE_SYSTEMNAME'
+      changeSystemName: 'CHANGE_SYSTEMNAME',
+      changeShowTagViews: 'TOGGLE_TAGVIEWS'
     }),
     handleClose() {
       this.$emit('closDrawerHandle')
     },
     changeSwitch() {
       this.changeBreadcrums()
+    },
+    changeTagViews() {
+      this.changeShowTagViews()
     },
     onSubmit() {
       this.changeSystemName(this.form.sysName)

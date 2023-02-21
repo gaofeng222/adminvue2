@@ -1,13 +1,18 @@
 <template>
-  <div>OrderCatagory'</div>
+  <div>
+    <h3>测试页面缓存的效果：</h3>
+    <el-input v-model="name" />
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'OrderCatagory',
+  name: 'TotalOrder',
 
   data() {
-    return {}
+    return {
+      name: 'test-demo'
+    }
   },
 
   mounted() {},
