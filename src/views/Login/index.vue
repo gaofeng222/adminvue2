@@ -38,7 +38,8 @@
         </el-form-item>
       </el-form>
       <div class="login-tips">
-        <span>测试账号:admin</span><span>测试密码:123456</span>
+        <p><span>测试管理员账号:admin</span><span>测试密码:123456</span></p>
+        <p><span>测试编辑员账号:editor</span><span>测试密码:123456</span></p>
       </div>
     </div>
   </div>

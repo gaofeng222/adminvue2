@@ -22,3 +22,10 @@ export const logout = (data) => {
     method: 'post'
   })
 }
+
+export const getInfo = (token) => {
+  return instance({
+    url: '/getInfo',
+    data: { token }
+  })
+}

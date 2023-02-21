@@ -189,11 +189,56 @@ export const constantRoutes = [
           import(/* webpackChunkName: "ProductCatagory" */ '@views/Contact')
       }
     ]
-  },
+  }
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  // { path: '*', redirect: '/404', hidden: true }
 ]
-
+export const asyncRoutes = [
+  {
+    path: '/permission',
+    component: Layout,
+    redirect: '/permission/directive',
+    alwaysShow: true, // will always show the root menu
+    name: 'Permission',
+    meta: {
+      title: '路由权限',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    icon: 'el-icon-s-platform',
+    children: [
+      {
+        path: '/permission/page',
+        component: () => import('@views/permission/page'),
+        name: 'PagePermission',
+        meta: {
+          title: '权限页面',
+          roles: ['admin'] // or you can only set roles in sub nav
+        },
+        icon: 'el-icon-s-check'
+      },
+      {
+        path: '/permission/directive',
+        component: () => import('@views/permission/directive'),
+        name: 'DirectivePermission',
+        meta: {
+          title: '指令权限'
+          // if do not set roles, means: this page does not require permission
+        },
+        icon: 'el-icon-notebook-1'
+      },
+      {
+        path: '/permission/role',
+        component: () => import('@views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: '角色权限',
+          roles: ['admin']
+        },
+        icon: 'el-icon-bank-card'
+      }
+    ]
+  }
+]
 // 3. 创建 router 实例，然后传 `routes` 配置
 // 你还可以传别的配置参数, 不过先这么简单着吧。
 const createRouter = () =>

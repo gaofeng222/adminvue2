@@ -1,5 +1,5 @@
 import storage from '@utils/storage'
-import { loginIn, logout } from '@api/users'
+import { loginIn, logout, getInfo } from '@api/users'
 import router, { resetRouter } from '@router'
 import { reject } from 'lodash'
 const state = { token: storage.get('token'), roles: [], introduction: '' }
@@ -32,10 +32,34 @@ const actions = {
         })
     })
   },
+  getInfo({ commit }, state) {
+    return new Promise((resolve, reject) => {
+      getInfo(state.token)
+        .then((response) => {
+          const { data } = response
+          if (!data) {
+            reject('验证失败，请重新登录')
+          }
+          const { roles, introduction } = data
+          // 用户角色不能为空
+          if (!roles || roles.length == 0) {
+            reject('用户角色不能为空')
+          }
+
+          commit('SET_ROLES', roles)
+          commit('SET_INTRODUCTION', introduction)
+          resolve(data)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
   logout({ commit }) {
     return new Promise((resolve, reject) => {
       logout().then((res) => {
         commit('SET_TOKEN', '')
+        commit('SET_ROLES', '')
         storage.remove('systemName')
         storage.remove('token')
         resetRouter()
@@ -43,6 +67,15 @@ const actions = {
       })
     }).catch((error) => {
       reject(error)
+    })
+  },
+  resetToken({ commit }) {
+    return new Promise((resolve) => {
+      commit('SET_TOKEN', '')
+      commit('SET_ROLES', [])
+      storage.remove('token')
+      resetRouter()
+      resolve()
     })
   }
 }

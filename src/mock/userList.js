@@ -14,7 +14,16 @@ const userList = Mock.mock({
     ]
   }
 })
-const loginOk = {
+const loginAdminOk = {
+  code: 200,
+  message: '登录成功',
+  data: {
+    result: true,
+    token:
+      'adminjiuiwqewqepkpqwepwpekpwqkepwqkepqkpekwpqekpqwkepqkwp132321312pkpkp12k3p1kpk12p3kp21k3p21k3p'
+  }
+}
+const loginEditorOk = {
   code: 200,
   message: '登录成功',
   data: {
@@ -46,7 +55,9 @@ export default {
     console.log(options, 'options222')
     let parmas = JSON.parse(options.body)
     if (parmas.username == 'admin' && parmas.password == 123456) {
-      return loginOk
+      return loginAdminOk
+    } else if (parmas.username == 'editor' && parmas.password == 123456) {
+      return loginEditorOk
     } else {
       return loginError
     }
@@ -54,5 +65,30 @@ export default {
   'post|/logout': (options) => {
     console.log(options, 'options')
     return loginout
+  },
+  'get|/getInfo': (options) => {
+    console.log(options, 'options-getInfo')
+    const opt = JSON.parse(options.body)
+    if (!opt.token) {
+      return {
+        code: 500,
+        message: 'token不能为空',
+        data: {
+          result: false
+        }
+      }
+    }
+    let isAdmin = localStorage.getItem('token').startsWith('admin')
+    console.log(isAdmin, 'isAdmin')
+    return {
+      code: 200,
+      message: 'success',
+      data: {
+        result: true,
+        roles: isAdmin ? ['admin'] : ['editor'],
+        // roles: ['admin', 'editor'],
+        introduction: '我是管理员'
+      }
+    }
   }
 }

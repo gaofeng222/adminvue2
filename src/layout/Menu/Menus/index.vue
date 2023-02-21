@@ -25,7 +25,7 @@
 
 <script>
 import MenuItem from './MenuItem'
-import { constantRoutes } from '@/router'
+// import { constantRoutes } from '@/router'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Menus',
@@ -37,16 +37,18 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['sidebar']),
+    ...mapGetters(['permission_routes', 'sidebar']),
     RouterLists() {
-      console.log('888')
       //对菜单进行处理,只有一个菜单就不显示父级
-      return constantRoutes.map((item) => {
+      let rouets = this.permission_routes.map((item) => {
         if (item.children && item.children.length === 1) {
-          item = item.children[0]
+          item.redirect = item = item.children[0]
         }
         return item
       })
+
+      console.log(rouets, '888')
+      return rouets
     },
     activeMenu() {
       const route = this.$route
