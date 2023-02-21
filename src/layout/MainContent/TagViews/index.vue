@@ -25,7 +25,10 @@
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item command="refresh">
-          <i class="el-icon-refresh"></i> 刷新</el-dropdown-item
+          <i class="el-icon-refresh"></i>刷新</el-dropdown-item
+        >
+        <el-dropdown-item command="closeSelectedTag">
+          <i class="el-icon-close"></i>关闭当前</el-dropdown-item
         >
       </el-dropdown-menu>
     </el-dropdown>
@@ -124,6 +127,7 @@ export default {
       return false
     },
     closeSelectedTag(view) {
+      console.log(view, 'view')
       this.closeTagsViews(view).then(({ visitedViews }) => {
         console.log(visitedViews, 'visitedViews')
         if (this.isActive(view)) {
@@ -138,7 +142,7 @@ export default {
       } else {
         // now the default is to redirect to the home page if there is no tags-view,
         // you can adjust it according to your needs.
-        if (view.name === 'Dashboard') {
+        if (view.name === 'Dashboard' || view.name == 'Analysis') {
           // to reload home page
           this.$router.replace({ path: '/redirect' + view.fullPath })
         } else {
@@ -158,6 +162,13 @@ export default {
             })
           })
         })
+      } else if (command == 'closeSelectedTag') {
+        // if (
+        //   ['/home'].includes(this.selectTag.path) ||
+        //   this.selectTag.meta.affix
+        // )
+        //   return
+        this.closeSelectedTag(this.selectTag)
       }
     }
   }
