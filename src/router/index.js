@@ -26,6 +26,21 @@ Vue.use(VueRouter)
  */
 
 export const constantRoutes = [
+  {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@views/Redirect/index'),
+        hidden: true,
+        meta: {
+          title: '重定向'
+        }
+      }
+    ]
+  },
   { path: '/login', component: Login, hidden: true },
   {
     path: '/',

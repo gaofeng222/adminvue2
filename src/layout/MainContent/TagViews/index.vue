@@ -19,6 +19,16 @@
           @click.prevent.stop="closeSelectedTag(tag)"
         /> </router-link
     ></scroll-pane>
+    <el-dropdown class="route-setting" @command="handleCommand">
+      <span class="el-dropdown-link">
+        <i class="el-icon-menu"></i>
+      </span>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item command="refresh">
+          <i class="el-icon-refresh"></i> 刷新</el-dropdown-item
+        >
+      </el-dropdown-menu>
+    </el-dropdown>
   </div>
 </template>
 
@@ -28,7 +38,14 @@ import path from 'path'
 import { mapGetters, mapActions } from 'vuex'
 export default {
   data() {
-    return { visible: false, top: 0, left: 0, affixTags: [], routes: [] }
+    return {
+      visible: false,
+      top: 0,
+      left: 0,
+      affixTags: [],
+      routes: [],
+      selectTag: {}
+    }
   },
   computed: {
     ...mapGetters(['visitedViews'])
@@ -50,9 +67,13 @@ export default {
     ...mapActions('tagsViews', {
       addTagsViews: 'addView',
       closeTagsViews: 'delView',
-      addVisistTags: 'addVisitedView'
+      addVisistTags: 'addVisitedView',
+      delCachedViews: 'delCachedView'
     }),
     isActive(route) {
+      if (route.path === this.$route.path) {
+        this.selectTag = route
+      }
       return route.path === this.$route.path
     },
     isAffix(tag) {
@@ -125,7 +146,20 @@ export default {
         }
       }
     },
-    openMenu() {}
+    openMenu() {},
+    handleCommand(command) {
+      if (command == 'refresh') {
+        console.log(this.selectTag, 'command')
+        this.delCachedViews(this.selectTag).then(() => {
+          const { fullPath } = this.selectTag
+          this.$nextTick(() => {
+            this.$router.replace({
+              path: '/redirect' + fullPath
+            })
+          })
+        })
+      }
+    }
   }
 }
 </script>
@@ -135,7 +169,7 @@ export default {
   width: 100%;
   background: #fff;
   border-bottom: 1px solid #d8dce5;
-
+  position: relative;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
   .tags-view-wrapper {
     .tags-view-item {
@@ -190,6 +224,12 @@ export default {
         }
       }
     }
+  }
+  .route-setting {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    margin-left: 10px;
   }
 }
 </style>
