@@ -87,7 +87,7 @@ export const constantRoutes = [
       {
         path: '/products/lists',
         icon: 'el-icon-s-home',
-        name: 'Products-lists',
+        name: 'ProductsLists',
         component: () =>
           import(/* webpackChunkName: "ProductLists" */ '@views/ProductLists'),
         meta: {

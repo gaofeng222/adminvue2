@@ -1,6 +1,10 @@
 <template>
   <div class="tags-view-container">
-    <scroll-pane @scroll="handleScroll" class="tags-view-wrapper">
+    <scroll-pane
+      ref="scrollPane"
+      @scroll="handleScroll"
+      class="tags-view-wrapper"
+    >
       <router-link
         v-for="tag in visitedViews"
         ref="tag"
@@ -29,6 +33,12 @@
         >
         <el-dropdown-item command="closeSelectedTag">
           <i class="el-icon-close"></i>关闭当前</el-dropdown-item
+        >
+        <el-dropdown-item command="closeOthersTags">
+          <i class="el-icon-s-release"></i>关闭其他</el-dropdown-item
+        >
+        <el-dropdown-item command="closeAllTags">
+          <i class="el-icon-error"></i>关闭所有</el-dropdown-item
         >
       </el-dropdown-menu>
     </el-dropdown>
@@ -71,7 +81,10 @@ export default {
       addTagsViews: 'addView',
       closeTagsViews: 'delView',
       addVisistTags: 'addVisitedView',
-      delCachedViews: 'delCachedView'
+      delCachedViews: 'delCachedView',
+      delAllViewsHandle: 'delAllViews',
+      delOthersViewsHandle: 'delOthersViews',
+      updateVisitedViewHandle: 'updateVisitedView'
     }),
     isActive(route) {
       if (route.path === this.$route.path) {
@@ -150,7 +163,21 @@ export default {
         }
       }
     },
-    openMenu() {},
+    moveToCurrentTag() {
+      const tags = this.$refs.tag
+      this.$nextTick(() => {
+        for (const tag of tags) {
+          if (tag.to.path === this.$route.path) {
+            this.$refs.scrollPane.moveToTarget(tag)
+            // when query is different then update
+            if (tag.to.fullPath !== this.$route.fullPath) {
+              this.updateVisitedViewHandle(this.$route)
+            }
+            break
+          }
+        }
+      })
+    },
     handleCommand(command) {
       if (command == 'refresh') {
         console.log(this.selectTag, 'command')
@@ -163,12 +190,20 @@ export default {
           })
         })
       } else if (command == 'closeSelectedTag') {
-        // if (
-        //   ['/home'].includes(this.selectTag.path) ||
-        //   this.selectTag.meta.affix
-        // )
-        //   return
+        if (this.selectTag.meta.affix) return
         this.closeSelectedTag(this.selectTag)
+      } else if (command == 'closeAllTags') {
+        this.delAllViewsHandle().then(({ visitedViews }) => {
+          if (this.affixTags.some((tag) => tag.path === this.selectTag.path)) {
+            return
+          }
+          this.toLastView(visitedViews, this.selectTag)
+        })
+      } else if (command == 'closeOthersTags') {
+        this.$router.push(this.selectedTag)
+        this.delOthersViewsHandle(this.selectTag).then(() => {
+          this.moveToCurrentTag()
+        })
       }
     }
   }

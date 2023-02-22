@@ -38,7 +38,7 @@
 <script>
 import { tableHeight } from '@/mixins/tableHeight'
 export default {
-  name: 'ProductLists',
+  name: 'ProductsLists',
   data() {
     return {
       tableData: [
