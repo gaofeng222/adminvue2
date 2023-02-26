@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d20963b"],{a99f:function(n,e,t){"use strict";t.r(e);var d=function(){var n=this,e=n._self._c;return e("div",[n._v("admin和editor都能看到的页面")])},i=[],u={name:"Adminvue2Directive",data(){return{}},mounted(){},methods:{}},a=u,r=t("2877"),c=Object(r["a"])(a,d,i,!1,null,"d447c7f8",null);e["default"]=c.exports}}]);
